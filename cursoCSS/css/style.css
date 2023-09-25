@@ -1,0 +1,328 @@
+/* Regal de CSS consta de 2 partes:
+1) el selector
+2)Bloque de declaraciones:
+  atributo:valor;
+  atributo-de-mas-dos-palabras:otro-valor */
+/* las@import son bloqueantes y son mala practica porque bloquean cuando el navegador lo lee(con ASS es lo que hay) */
+@import url("otro-hoja.css");
+h1 {
+  color: orange;
+  background-color: black;
+}
+/* 
+  links de referencia y documentacion:
+  -https://es.wikipedia.org/wiki/Hoja_de_estilos_en_cascada
+  -https://www.w3.org/html/logo/
+  -https://www.w3.org/standerds/webdesign/htmlscss.html
+  -https://www.w3.org/TR/css-2020/
+  -https://developer.mozilla.org/es/docs/Web/CSS
+  -https://cssreference.io/
+  -https://caniuse.com/
+  -https://codeguide.co/
+ */
+
+/* Selectores Básicos:
+  1) Etiquetas - son elementos
+  2) Identificadores - atributo id - #
+  3) Clases - atributo class .
+  */
+p {
+  color: midnightblue;
+}
+/* Dar estilos con ID se considera un AntiPatron-> mala practica, porque es unico y no se le puede poner ese mismo id a otra etiqueta porque es unico, mejor las clases, tambien tienen un mayor peso respecto a los demas identificadores y clases */
+#parrafo-dos {
+  background-color: skyblue;
+}
+
+/* Dar estilos con clases nos permite reutilizar neustro codigo CSS, no importa el orden que las pongas en principio para la cascada e importancia pero conviene tener un metodo , por ejemplo ponerlas en orden alfabetico */
+.bg-skyblue {
+  background-color: skyblue;
+}
+.bg-steelblue {
+  background-color: steelblue;
+}
+.text-20 {
+  font-size: 20px;
+}
+.text-32 {
+  font-size: 32px;
+}
+.text-white {
+  color: white;
+}
+
+.hijos-directos > li {
+  background-color: thistle;
+}
+.hijos-descendientes b {
+  background-color: thistle;
+}
+/* La virguilla hace referencia a los hermanos(todos) que vienen despues del que tiene la clase sin incluir este(en donde esta la clase o el identificador)
+Lo selectores de hermanos van a a aplciar a los elementos que son hermanos y estan por debajo del elemento de referencia  */
+.hermanos-general ~ li {
+  background-color: thistle;
+}
+/* El selector de hermanos adyacentes (+) que coincida con nuestro selector de referencia que este inmediatamente debajo solo el primero no todos como con la verguilla ~*/
+.hermanos-adyacentes + li {
+  background-color: thistle;
+}
+
+/* Selectores de atributos
+como href como target etc etc se pueden combinar por ejemplo dentro de los elemntos de una clase los elementos que tengan dicho atributo dentro de esta se modifican por ejemplo, en este caso decimos dentro de la clase .selectores-atributos y los enlaces a que son hijos descendientes(todos) los que tengan el atributo [atributo]->como para hacerlo automatico en html con el tabulador para hacer referencia a estos en css es igual */
+.selectores-atributos a[href] {
+  color: orangered;
+}
+/*lo mismo que antes pero ahora especificando que valor tiene dicho atributo */
+.selectores-atributos a[target="_blank"] {
+  font-weight: bold;
+}
+/* Si le ponemos un * antes de la igualdad del valor del atributo y este tiene dicha palabra en su interior exactamente igual en alguna parte osea su cadena iguala a los caracteres que igualamos con el asteriosco despues del igual si aplicara a estos.
+ El comodin del * aplica el sestilo si contiene el texto o cadena en cuestion estrictamente en caulquier parte!!*/
+.selectores-atributos a[href*="jonmircha"] {
+  font-size: 24px;
+}
+/* el ^= significa que aquellos atributos que empiecen con lo que esta despues del igual se aplique da igual si luego hay mas caracteres si cumple dicho patron lo aplicara */
+.selectores-atributos a[href^="http:"] {
+  /* text-decoration se puede quitar por ejemplo el subrayado con none */
+  text-decoration: none;
+}
+/* El comodin del $ aplica el estilo si contiene el texto en cuestion al final es decir empieza a igualar la cadena caracter a caracter desde el final hasta que iguale y si iguala se  cumple*/
+.selectores-atributos a[href$=".com"] {
+  background-color: black;
+}
+/* Para clases usamos la verguilla que tambien serbia para el selector de hermanos general que daba efectoa  todos los hermanos que vienen despues de los que tienen dicha clase exceptuando tambien  a el, en este caso.
+El comodin del ~ aplica el estilo si contiene el texto en cuestion en una lista separada por espacios o si la lista es unica o solo tiene un espacio adelante o atras  o tiene varios espacios*/
+.selectores-atributos a[class~="cursos"] {
+  background-color: midnightblue;
+}
+/*  El comodin del | (que esta en la tecla 1 abajo) aplica el estilo si contiene el texto en cuestion en una lista separada por espacios y que despues del texto en cuestion tiene que venir un guion medio- despues de dicha palabra*/
+.selectores-atributos a[class|="menu"] {
+  font-style: italic;
+}
+
+/* Selector universal */
+/* Si yo pongo un asterisco y habro llaves esto hara que aplicara los estilos a todos los elementos que tenga dentro de mi documento */
+* {
+  font-family: sans-serif;
+}
+/* En este caso es que dentro de la clase .selector-universal espacio * significa a todos sus elementos hijos,nietos,bisnietos....., se puede contextualizar */
+.selector-universal * {
+  font-size: 24px;
+}
+
+/* Pseudoclases - Dan estilos dependiendo del contexto,posicion o estado del elemento:
+    -htttps://developer.mozilla.org/es/docs/Web/CSS/Pseudo-clases */
+
+/* En este caso los estados solo los atributos boooleanos es decir estan o no estan como required esta combinamos dentro del contexto de la clase .form-pseudocalses luego espacio asterisco que significa a todos y luego dos puntos y el atributo(estado) que quiere decir que a todos los elementos que tengan dentro ese atributo requiered aplicales lo escrito despues */
+.form-pseudoclases *:required {
+  border-color: yellow;
+}
+/* cuando dicho elemento tiene el estado valido, acuerdate que  este aveces lo pone directamente la etiqueta html o por javascript al igual que el invalid */
+.form-pseudoclases *:valid {
+  border-color: green;
+}
+
+.form-pseudoclases *:invalid {
+  border-color: red;
+}
+/* fous lo seleccionado */
+.form-pseudoclases *:focus {
+  background-color: skyblue;
+}
+.form-pseudoclases *:disabled {
+  background-color: pink;
+}
+/* La pseudoclased de visited tiene qu ir arriba del hover para que no inhabilite a este ultimo, ele stado hover al ser un estado interactivo deberia siempre ir al final con los demas estados interactivos para evitar que se machaquen  :link -> :active-> :visited -> :hover orden!!*/
+.menu-pseudoclases a:visited {
+  color: olive;
+}
+.menu-pseudoclases a:hover {
+  color: orange;
+}
+/* El estado en css tiene que estar al lado del elemento o clase o lo que sea que esta interactuando anteriormente es a:hover y aqui como se refiere a los elementos .p-pseudoclases tiene que ser seguido sin espacios ya que es a estas clases directamente y no a sus hijos por eso no hay espacio entre p-pseudoclases:hover  */
+.p-pseudoclases:hover {
+  font-size: 20px;
+}
+/* Aqui significa que cuando se tenga dicho target en la url de la pagina se aplicaran dichos cambios en la seccion que tenga ese id dentro de nuestro html, esto sirve para crear menu sin necesidad de JS es decir cuando targeteamos el menu con su id con #menu (por ejemplo) se abriria dicho menu y cuando no lo tenemos targeteado en la url se cerarria, tambien una ventana modal por ejemplo */
+#temario-css:target {
+  background-color: lightgreen;
+}
+
+/* EStilos por posicion  con los 2 puntos :*/
+.lista-pseudoclases li:first-child {
+  color: green;
+}
+.lista-pseudoclases li:last-child {
+  color: violet;
+}
+/* En este caso el nth-child hay que apsarle un parametro y este numero te dira a cual elemento hijo de esta clase li se le aplican los estilos empiza desde el 1 no desde el 0 ojo! */
+.lista-pseudoclases li:nth-child(3) {
+  color: navy;
+}
+/* 4n significa de cada elemento numero 4  y posteriores  multiplos de 4 elementos aplica los estilos */
+.lista-pseudoclases li:nth-child(4n) {
+  font-size: 20px;
+}
+/* En este caso se aplica cada 3*n mas x si llega al final vuelve una ultima vezy añade el proximao de la sigueinte vuelta siempre ya sea el que este primero segundo o quinto pero da una vuelta entera y  aplica a su sumatori */
+.lista-pseudoclases li:nth-child(3n + 2) {
+  font-weight: bold;
+}
+/* Para que solo los hijos pares se vean afectados usaremos el valor even */
+.lista-pseudoclases li:nth-child(even) {
+  background-color: yellow;
+}
+/* para los impares usaremos odd que significa impar en ignles */
+.lista-pseudoclases li:nth-child(odd) {
+  background-color: orange;
+}
+/* el fisrt child tiene que coincidir con el tipo dentro del html es decir si dentro de mi article el primer hijo es un header y ponemos p:first-child no funcionara porque le estamos diciendo que el first child por obligacion es un parrafo y no funciona, para ello usaremos que encuentr el primer hijo del tipo p para ello usaremos p:first-of-type el primer hijo de tipo en español */
+.articulo-pseudoclases p:first-of-type {
+  background-color: pink;
+}
+/* Tabien hay una pseudoclase que es last-of-type, en este caso es igual si yo le pongo directamente last-child no funcionara porque en mi HTML el ultimo hijo es un footer y yo le estoy diciendo en el css que es un parrafo(p) por lot anto no funcionara y por lo tanto hay que hacer lo mismo que antes y ponerle un last-of-type el ultimo de su tipo es el que esta antes de su tipo */
+.articulo-pseudoclases p:last-of-type {
+  background-color: pink;
+}
+/* tambien tendremos por lo tanto un nth()-of type,tambien se puede poenr+1+2 y tambien el par(even y el impar(odd) */
+.articulo-pseudoclases p:nth-of-type(3) {
+  background-color: fuchsia;
+}
+/* Ahora esta la pseudoclase negacion, que funcionaria que se aplica lo que pone a todos los elmentos exceptuando al que señala o define, para ello ponemos un :not(p), si hay varios los vas separando por comas por ejemplo(p,div,footer, etc...) */
+
+.articulo-pseudoclases *:not(p) {
+  background-color: beige;
+}
+
+/* Pseudoelementos - DAn estilos a partes especificas de un element,se usa el :: para diferenciarlos de las pseudoclases
+https://developer.mozilla.org/es/docs/Web/CSS/Pseudoelementos */
+/* Con : envede con :: tambien lo reconoce pero es una buena practica poenr 2 :: para que tu te des cuenta y digas ahh es pseudoelemento */
+.saga-geminis::before {
+  content: "🤼‍♀️";
+}
+.saga-geminis::after {
+  content: "♊";
+}
+.saga-precio::before {
+  content: "$";
+  font-weight: bold;
+}
+.saga-precio::after {
+  content: " USD";
+  font-weight: bold;
+}
+
+.p-pseudoelementos::first-letter {
+  font-weight: bold;
+  font-size: 32px;
+}
+.p-pseudoelementos::first-line {
+  color: coral;
+}
+/* esto es cuando selecionas texto en plan dejando apretado el boton izquierdo del raton y arrastrando */
+.p-pseudoelementos::selection {
+  color: greenyellow;
+  background-color: black;
+}
+/* *::selection {
+  color: greenyellow;
+  background-color: black;
+} */
+.input-pseudoelementos::placeholder {
+  color: green;
+}
+
+/* Agrupar selectores */
+/* La coma nos sirve como agrupador para cuando necesitamos aplicar cierta regla o estilos a diferentes elementos podemos usar la como como aqui abajo   */
+.form-agrupar-selectores input[type="text"],
+.form-agrupar-selectores input[type="email"],
+.form-agrupar-selectores textarea {
+  border-color: yellow;
+  border-width: 2px;
+  border-style: dashed;
+  background-color: black;
+  font-size: 20px;
+  /* Cuando le ponemos display block cambia los elementos a que sean elementos de bloque, se suele usar para los elementos que sond e linea y queremos que se comporten como los de bloque */
+  display: block;
+  width: 300px;
+}
+
+/* 
+El algoritmo de CSS: Es la forma en que el navegador aplica los estilos al documento HTML. Es vital entender este concepto para que entiendas como se aplican y en algunas ocasiones se sobreescriban las reglas CSS.
+
+  1) La cascada
+  2) La especificidad
+  3) La herencia.
+
+ -1 La cascada es el mecanismo en que el navegador aplica los estilos. Y toma en cuenta lo siguiente en este orden:
+  1)El origen del Código:
+    -User Agent (lo estilos por defecto del navegador)
+    -Personalizaciones del usuario
+    -Los estilos del autor.
+    
+  2) La Especificidad del Selector
+
+  3) Orden de Aparición
+
+  La especificidad es el peso que tiene un selector cuando hay conflicto de estilos. Se calcula de la siguiente forma: 
+    Etiquetas y pseudoelementos --------- 0,0,0,1
+    Clases, atributos y pseudoclases ---- 0,0,1,0
+    Identificadores --------------------- 0,1,0,0
+    Estilos en línea -------------------- 1,0,0,0
+    !important ------------Rompe la especificidad
+ */
+
+/* La Herencia , es la capacidad de un selector de obtener (heredar) los valores de sus ancestros más cercanos, para aplicarla se usa el valor inherit, si queremos evitarla podemos asignar otro valor o inicializar la propiedad en cuestion con el valor initial.
+Hay ciertas propiedades que no se heredan como los bordes,el fondo aunque parece quese hereda pero seguramente sea del padre, normalmente se heredan el font-size el weight el font-family,color...
+
+
+https://web.dev/learn/css/inheritance/#which-properties-are-inheritable
+  */
+
+blockquote#cita-marco.cita-marco {
+  background-color: lightsteelblue;
+}
+blockquote {
+  background-color: burlywood;
+}
+
+#cita-marco {
+  background-color: lightgreen;
+}
+blockquote.cita-marco {
+  background-color: tomato;
+}
+.cita-marco {
+  background-color: cornflowerblue;
+}
+.cita-marco {
+  background-color: mediumaquamarine !important;
+}
+blockquote#cita-marco {
+  background-color: lightsalmon;
+}
+
+.cita-marco {
+  background-color: darkorange !important;
+  font-size: 32px;
+  border-style: dotted;
+  border-color: red;
+}
+
+.cita-marco cite {
+  background-color: pink;
+  background-color: inherit;
+  font-size: 24px;
+  font-size: initial;
+  border-style: inherit;
+  border-color: inherit;
+}
+/* 
+https://autoprefixer.github.io/
+https://caniuse.com/
+Prefijos de los navegadores
+-webkit-user-select: none;
+-moz-user-select:none;
+-ms-user-select: none;
+user-select:none;
+
+*/

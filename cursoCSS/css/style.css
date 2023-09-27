@@ -155,7 +155,7 @@ El comodin del ~ aplica el estilo si contiene el texto en cuestion en una lista 
 .lista-pseudoclases li:last-child {
   color: violet;
 }
-/* En este caso el nth-child hay que apsarle un parametro y este numero te dira a cual elemento hijo de esta clase li se le aplican los estilos empiza desde el 1 no desde el 0 ojo! */
+/* En este caso el nth-child hay que pasarle un parametro y este numero te dira a cual elemento hijo de esta clase li se le aplican los estilos empiza desde el 1 no desde el 0 ojo! */
 .lista-pseudoclases li:nth-child(3) {
   color: navy;
 }

@@ -1,0 +1,141 @@
+/* 
+background-color: define el color de fondo del elemento.
+background-image: define la imagen de fondo del elemento.
+background-repeat: define cómo se repite la imagen de fondo en el elemento.
+background-size: define el tamaño de la imagen de fondo, primer valor x, segundo valor y.
+
+  -cover cambia el tamaño de la imagen de fondo para asegurarse de que permanezca completamente
+  visible.
+
+  -contain cambia el tamaño de la imagen de fondo para asegurarse de que el elemento esté completamente cubierto.
+background-position:
+  define la posición de la imagen de fondo, primer valor x, segundo y, si no se especifica un segundo valor éste será center
+  aparte de valores numéricos podemos indicar el posicionamiento con las palabras: center,top,bottom,left and right
+
+background-clip: define cuánto debe extenderse el fondo dentro del elmento
+background-origin: define el origen de la imagen de fondo.
+background-attachment: define cómo se comportará la imagen de fondo al desplazarse por la página
+
+
+
+*/
+
+.box {
+  /* 2 valores en margin el pimero es apara el alto y el bajo y elsegundo valor es para izquierda y derecha */
+  margin: 2rem auto;
+  width: 300px;
+  height: 300px;
+  border: thick dashed red;
+}
+
+.bg-color {
+  background-color: blue;
+}
+.bg-image {
+  background-image: url("../assets/puesta-sol.jpg");
+  /* La imagen no cabe */
+}
+.bg-size {
+  background-image: url("../assets/puesta-sol.jpg");
+  /* La imagen no cabe */
+  background-size: 300px 200px;
+  /* El primer valor es para el ancho y el segundo valor se calcula automaticamente */
+  background-size: 300px;
+  background-size: cover;
+  background-size: contain;
+}
+
+.bg-repeat {
+  background-image: url("../assets/puesta-sol.jpg");
+  background-size: 100px;
+  /* Solamente que se repita en x */
+  background-repeat: repeat-x;
+  /* Solamente que se repita en y */
+  background-repeat: repeat-y;
+  /* Y para que no se repita le ponemos no-repeat para hero image */
+  background-repeat: no-repeat;
+}
+
+.bg-position {
+  /* Si nuestra imagen no alcanza a cubrir toda la caja, el color de fondo que tenga, cubrira el espacio restante */
+  background-color: skyblue;
+  background-image: url("../assets/puesta-sol.jpg");
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: 10px 20px;
+  background-position: 1rem 2rem;
+  background-position: 10% 20%;
+  /* Si solo ponemos un valor el otro ira a center osea centrado en el eje Y  */
+  background-position: 10%;
+  /* Tambien se pueden usar las palabras top,right,left,bottom */
+  background-position: top right;
+  background-position: bottom center;
+  background-position: bottom left;
+  background-position: bottom;
+}
+
+.bg-position {
+  /* Si nuestra imagen no alcanza a cubrir toda la caja, el color de fondo que tenga, cubrira el espacio restante */
+  background-color: skyblue;
+  background-image: url("../assets/puesta-sol.jpg");
+}
+
+.bg-clip {
+  background-color: skyblue;
+  background-image: url("../assets/puesta-sol.jpg");
+  background-repeat: no-repeat;
+  background-size: 200px;
+  background-size: cover;
+  /* El background-clip trabaja mas para el fondo no tanto para la imagen */
+  background-clip: border-box;
+  /* Con padding box no esta considerando el grosor de borde */
+  background-clip: padding-box;
+  /* Empieza a rellenar despues del padding el background color */
+  background-clip: content-box;
+  padding: 1rem;
+}
+
+.bg-origin {
+  background-color: skyblue;
+  background-image: url("../assets/puesta-sol.jpg");
+  background-repeat: no-repeat;
+  background-size: 200px;
+  background-size: cover;
+  /* Background-origin dicta como se ve la imagen siendo el valor por defecto padding-box por ello en las fotos estas empieza a partir del padding */
+  background-origin: padding-box; /* Default */
+  background-origin: content-box;
+  /* con border-box hace que empiece desde el borde */
+  /* background-clip: content-box; */
+  background-origin: border-box;
+  background-origin: content-box;
+  padding: 1rem;
+}
+
+.bg-attachment {
+  background-color: skyblue;
+  background-image: url("../assets/puesta-sol.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 50vh;
+  background-attachment: fixed;
+  /* no usar el shorthand background  */
+}
+
+.bg-multiple {
+  width: 50%;
+  height: 30vh;
+  background-image: url(../assets/favicon.png), url(../assets/puesta-sol.jpg);
+  background-repeat: repeat-x, no-repeat;
+  background-size: 10%, cover;
+}
+.bg-art {
+  width: 1000px;
+  height: 700px;
+  /* background-image: url(../assets/arbol.png), url(../assets/aves.png),
+    url(../assets/cielo.png); */
+  /* Aqui podemos hacer todo con la shorthand background */
+  background: url(../assets/arbol.png) no-repeat center bottom,
+    url(../assets/aves.png) no-repeat center bottom fixed,
+    url(../assets/cielo.png) no-repeat center top;
+}

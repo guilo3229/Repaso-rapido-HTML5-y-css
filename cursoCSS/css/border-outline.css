@@ -1,0 +1,49 @@
+.box {
+  background-color: black;
+  /* 2 valores en margin el pimero es apara el alto y el bajo y elsegundo valor es para izquierda y derecha */
+  margin: 2rem auto;
+  width: 400px;
+  height: 400px;
+  border: thick solid red;
+}
+
+.border-radius {
+  border-top-left-radius: 4rem;
+  border-top-right-radius: 4rem;
+  border-bottom-left-radius: 4rem;
+  border-bottom-right-radius: 4rem;
+  /* primer valor diagonal izquierda, segundo valor diagonal derecha */
+  border-radius: 2rem 4rem;
+  /* Primer valor esquina superior izquierda, segundo valor diagonal derecha y tercer valor esquina inferior derecha */
+  border-radius: 2rem 4rem 0;
+  /* Manecillas del reloj empezando por la esquina superior izquierda */
+  border-radius: 4rem 3rem 2rem 1rem;
+  border-radius: 2rem;
+}
+
+.border-radius-2 {
+  border-radius: 2rem/ 4rem;
+  border-radius: 2rem 4rem/ 4rem 8rem;
+}
+.border-radius-3 {
+  /* Para redondear los 4 lados y hacer un circulo perfecto con poner border-radius: 50% es suficiente a partir de ese valor no varia sigue siendo un circulo, la caja debe ser totalmentente cuadrada */
+  border-radius: 70%;
+}
+.border-radius-4 {
+  width: 400px;
+  height: 200px;
+  /* Para redondear los 4 lados y hacer un circulo perfecto con poner border-radius: 50% es suficiente a partir de ese valor no varia sigue siendo un circulo, la caja debe ser totalmentente cuadrada,sino se formara una elipse con su maximo es el 50% tambien */
+  border-radius: 50%;
+}
+
+.outlines {
+  color: white;
+  text-align: center;
+  outline-width: 5px;
+  outline-style: dashed;
+  outline-color: chartreuse;
+  outline: thick solid blue;
+  /* border-width: 20px; */
+  /* outline-width: 100px; */
+  outline-offset: -3rem;
+}

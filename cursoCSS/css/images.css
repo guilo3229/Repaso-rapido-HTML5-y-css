@@ -1,0 +1,33 @@
+/* Conviene que formatees la etiqueta img para que se adapten */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card {
+  border: medium solid black;
+  width: 400px;
+  height: 400px;
+}
+
+.card img {
+  background-color: blanchedalmond;
+  height: 300px;
+  /* Cuando tengas problemas de deformación cuando en una etiqueta tengas una foto, esta foto cuando le das unos valores se puede deformar porque por ejemplo es panorámica y le das mas heiht en proporción, para solucionarlo usaremos: */
+  /* Object-fit se parece a background position */
+  /* Con cover es 50% en x y 50% y las centra */
+  /* Luego puedes colocarlo con object-position donde quieras */
+  /* object-fit: cover; */
+  object-fit: fill; /* Default desproporciona */
+  object-fit: contain;
+  /* Object fit none no adaptes, en principio en el medio y luego moverlo con object-position */
+  /* object-position: left top; */
+  object-fit: none;
+  /* Scale down toma el valor que sea menor entre contain y none,comportamiento con mayor peso cuidado!! */
+  object-fit: scale-down;
+
+  object-position: left top;
+  object-position: 50% 50%;
+  object-position: -40px center;
+  object-position: 50% 50%;
+}

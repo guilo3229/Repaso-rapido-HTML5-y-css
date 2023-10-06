@@ -1,0 +1,68 @@
+/* Si quieres que todas tus variables esten en todo tu dicumento HTML usaremos la etiqueta HTML  o su susodicha mas fuerte o pesada mayor especificidad 10 respecto a 1 :root */
+
+:root {
+  color: darkgreen;
+  --defatult-bg-color: skyblue;
+}
+html {
+  color: red;
+  box-sizing: border-box;
+}
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+.custom-props-1 {
+  /* Cuando pones 2 guiones -- css lo interpreta que estas definiendo variables */
+  --primary-color: gray;
+  --font-size: 32px;
+  /* Para usar variables en CSS tenemos que usar la funcion var() */
+  background-color: var(--primary-color);
+}
+
+.custom-props-3 {
+  font-size: var(--font-size);
+  border: thin solid var(--border-color);
+  padding: 1rem;
+}
+/* Hay reglas que nuestras variables tienen que cumplir una de ellas es el ambito ,hasta que punto existen nuestras variables y solo funcionan para el elmento donde se definio y sus elementos hijos con sus susodichas clases el scope*/
+.custom-props-2 {
+  background-color: var(--defatult-bg-color);
+  border: thin solid var(--border-color);
+  /* rem - basada en la anchura de la "m" de la fuente del elemento raíz(HTML)->tipografia en rems->Padding -margin
+   ex - basada en la altura de la "x" de la fuente del elemento->Para reglones */
+  padding: 1rem;
+}
+.title-props {
+  /* Si ponemos un segundo valor si este primero no se puede aplicar se usara el segundo, En este caso tenemos 2 variables que se llaman igual pero cada una existen en su propio contexto */
+  --primary-color: navy;
+  color: var(--primary-color, orange);
+  background-color: var(--defatult-bg-color);
+}
+
+.ch-10 {
+  /* Para automatizar estas bien para textos por ejemlo */
+  --padding-size: 2ch;
+  --num-ch: 10ch;
+  background-color: var(--defatult-bg-color);
+  /* ch - basada en la anchura del "0" de la fuente del elmento->Para formularios para contar el numero de caracteres  */
+  font-size: 2rem;
+  padding: var(--padding-size);
+  /* Para automatizar estas bien para textos por ejemlo,cuando hagas calculos hay que dejar espacios en blanco */
+  width: calc(var(--num-ch) + var(--padding-size) * 2);
+}
+
+.min-max {
+  background-color: var(--defatult-bg-color);
+  margin-top: 1rem;
+  /* Saca el mas pequeño de las  medidas */
+  width: min(300px, 20vw, 20rem);
+  /* Coge el mayor valor de las medidas */
+  height: max(200px, 25vh);
+}
+
+h1 {
+  /* Hace crecer de un minimo a un maximo poco a poco con el incremento hasta el valor maximo */
+  font-size: clamp(2rem, 1rem + 3vw, 3rem);
+}

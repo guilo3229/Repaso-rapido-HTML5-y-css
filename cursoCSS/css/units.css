@@ -1,0 +1,135 @@
+/* 
+Unidades de Medida
+  1) Absolutas (Su valoe no cambia, son unidades del mundo real) -->Para imprimir
+  -pc,cm,mm,in, Q
+  -pt(1/72in)
+  -px(1/95in)->fontsize html
+  2) relativas (Su valor es relativo a un contexto) em,rem,ex,ch - al tamaño de la fuente
+   em - basada en la anchura de la "m" de la fuenta del elemento->padding-margin tajeta s-m-l-xL
+   rem - basada en la anchura de la "m" de la fuente del elemento raíz(HTML)->tipografia en rems->Padding -margin
+   ex - basada en la altura de la "x" de la fuente del elemento->Para reglones
+   ch - basada en la anchura del "0" de la fuente del elmento->Para formularios para contar el numero de caracteres
+  % - al tamaño del contenedor ->ancho y alto
+  vw,vh,vmin, vmax - al tamaño del viewport
+   vw - ancho del viewport van de 1 a 100
+   vh - alto del viewport van de 1 a 100
+   vmax - entre vw y vh toma el que tenga mayor valor
+   vmin - entre el vw y vh toma el que tenga menor valor
+-->Hero image y su font-size dentro
+   Conversiones entre unidades - http://pxtoem.com/
+
+  
+  
+  
+  */
+html {
+  box-sizing: border-box;
+  font-size: 20px;
+  /* background-color: black; */
+  font-size: 16px;
+}
+body {
+  margin: 0;
+}
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+.pixels {
+  background-color: cadetblue;
+  width: 500px;
+  height: 400px;
+  padding: 20px;
+  /* En la medida que se pueda se deben usar unidades de medida responsivas por el responsive-design */
+  font-size: 16px;
+  border: thick solid rebeccapurple;
+}
+.ems {
+  /* Los ems toman por referencia el tamaño de la fuente de normal es de 16px pero si cambia seria el cambio */
+  background-color: cadetblue;
+  font-size: 24px;
+  padding: 1em 0.5em;
+
+  border: thick solid rebeccapurple;
+}
+.em-child {
+  /* Coge la base de su contenedor mas cercano */
+  background-color: salmon;
+  border: thick solid beige;
+  margin: 0.5em;
+  padding: 1em;
+  font-size: 2em;
+}
+.rems {
+  background-color: cadetblue;
+  font-size: 24px;
+  padding: 1rem 0.5rem;
+
+  border: thick solid rebeccapurple;
+}
+.rem-child {
+  background-color: salmon;
+  border: thick solid beige;
+  margin: 0.5rem;
+  padding: 1rem;
+  font-size: 2rem;
+}
+.exs {
+  background-color: cadetblue;
+  font-size: 24px;
+  padding: 1ex 0.5ex;
+
+  border: thick solid rebeccapurple;
+}
+.ex-child {
+  background-color: salmon;
+  border: thick solid beige;
+  margin: 0.5ex;
+  padding: 1ex;
+  font-size: 2ex;
+}
+.chs {
+  background-color: cadetblue;
+  width: 10ch;
+}
+.percentages {
+  background-color: darkkhaki;
+  /* los elementos de linea ignoran el ancho las de bloqye no lo ignoran */
+  padding: 5%;
+  margin: 20% 10%;
+  width: 80%;
+  font-size: 100%;
+  /* La altura la va a delimitar el contenido */
+  height: 100%;
+}
+/* Los % toman como referencia el tamaño del contenedor por ello este tiene que tener unas dimensiones definidas o heredadas */
+.height-parent {
+  background-color: brown;
+  width: 500px;
+  height: 500px;
+}
+.height-child {
+  background-color: coral;
+  width: 50%;
+  height: 50%;
+}
+
+.viewport {
+  background-color: darkcyan;
+  width: 50vw;
+  /* Recuerda que la etiqueta body tiene margenes por defecto y recuerda que las barras de scroll del navegador tambien forman parte del viewport */
+  /* Los porcentajes te respetan estas cosas, si por ejemplo quisieras hacer una imagen full screen podrias definir las medidas de altura(height) con viewport y la anchura con % */
+  width: 100vw;
+  height: 50vh;
+  height: 100vh;
+  font-size: 5vw;
+  padding: 2vh 2vw;
+}
+.vmin,
+.vmax {
+  background-color: darksalmon;
+  border: thick solid cyan;
+  width: 50vmax;
+  height: 50vmin;
+}

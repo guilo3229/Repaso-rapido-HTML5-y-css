@@ -1,0 +1,17 @@
+.table {
+  font-size: 3rem;
+  /* Hay varias propiedades que son exclusivas de la tabla */
+  border-collapse: collapse;
+  border-collapse: separate; /* Defatult */
+  /* El hide quita el recuadro cuando no tenga valor en ese recuadro */
+  empty-cells: hide;
+  empty-cells: show;
+}
+
+.table,
+th,
+td {
+  border: medium solid black;
+  /* border-spacing no se puedes usar con collapse solo con separate */
+  border-spacing: 1rem;
+}

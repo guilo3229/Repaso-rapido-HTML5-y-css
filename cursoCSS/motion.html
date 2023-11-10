@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movimiento en CSS</title>
+    <link rel="stylesheet" href="css/motion.css" />
+  </head>
+  <body>
+    <h1>Movimiento en CSS</h1>
+    <hr />
+    <h2>Transiciones</h2>
+    <section class="transitions">
+      <h2></h2>
+      <div class="box"></div>
+      <article class="card">
+        <img src="assets/puesta-sol.jpg" alt="Puesta de sol" />
+      </article>
+    </section>
+    <hr />
+    <section class="transforms">
+      <h2>Transformaciones</h2>
+      <h3>Transformaciones en 2D</h3>
+      <article class="card transform-2d">
+        <img src="assets/puesta-sol.jpg" alt="Puesta de sol" />
+      </article>
+      <h3>Transformaciones en 3D</h3>
+      <article class="card transform-3d">
+        <img src="assets/puesta-sol.jpg" alt="Puesta de sol" />
+      </article>
+      <h3>Origen de la transformación</h3>
+      <article class="card transform-origin">
+        <img src="assets/puesta-sol.jpg" alt="Puesta de sol" />
+      </article>
+      <h3>Flip Cards</h3>
+      <article class="flip-card-1">
+        <div class="flip-face flip-front">
+          <img src="assets/puesta-sol.jpg" alt="Puesta de sol" />
+        </div>
+        <div class="flip-face flip-back">
+          <img src="assets/BuenosDias.jpg" alt="Buenos dias" />
+        </div>
+      </article>
+      <article class="flip-card-2">
+        <div class="flip-face flip-front">
+          <img src="assets/puesta-sol.jpg" alt="Puesta de sol" />
+        </div>
+        <div class="flip-face flip-back">
+          <img src="assets/BuenosDias.jpg" alt="Buenos dias" />
+        </div>
+      </article>
+    </section>
+    <hr />
+    <section class="animations">
+      <h2>Animaciones</h2>
+      <article class="card my-animation">
+        <img src="assets/puesta-sol.jpg" alt="Puesta de sol" />
+      </article>
+      <article class="card my-animation-2">
+        <img src="assets/puesta-sol.jpg" alt="Puesta de sol" />
+      </article>
+      <article class="card animation-multiple">
+        <img src="assets/puesta-sol.jpg" alt="Puesta de sol" />
+      </article>
+    </section>
+    <hr />
+    <section class="motion-examples">
+      <h2>Ejemplos de efectos de movimiento en CSS</h2>
+      <h3>FaceIn/FaceOut</h3>
+      <div class="fade-in">👨‍🦱</div>
+      <div class="fade-out">👨‍🦱</div>
+      <h3>Sacudir</h3>
+      <div class="shake">🍕</div>
+      <h3>pulsaciones</h3>
+      <div class="pulse">❤️</div>
+      <div class="pulse">🦊Kenai🦊</div>
+      y animando con CSS
+      <h3>Dibujando y animando en CSS</h3>
+      <h4>Corazón</h4>
+      <div class="pulse">Eres el CSS de mi HTML</div>
+      <div class="heart"></div>
+      <h4>Spinner/Loader</h4>
+      <div class="spinner"></div>
+      <h3>Botones Animados</h3>
+      <button class="btn anim-bottom to-left">animación Izquierda</button>
+      <button class="btn anim-bottom to-center">Animación centro</button>
+      <!-- Ir aplicando el concepto de utility first que es que cada clase tenga una utilidad -->
+      <button class="btn anim-bottom to-right">Animación Derecha</button>
+      <button class="btn anim-bg-gradient">Fondo con Gradiente</button>
+      <h3>Menu de pestañas (Tabs)</h3>
+      <nav class="tabs-menu">
+        <input type="radio" id="tab-1" name="tabs" />
+        <label for="tab-1">Sección 1</label>
+        <input type="radio" id="tab-2" name="tabs" />
+        <label for="tab-2">Sección 2</label>
+        <input type="radio" id="tab-3" name="tabs" />
+        <label for="tab-3">Sección 3</label>
+        <input type="radio" id="tab-4" name="tabs" />
+        <label for="tab-4">Sección 4</label>
+        <input type="radio" id="tab-5" name="tabs" />
+        <label for="tab-5">Sección 5</label>
+        <div class="tab-bg-hover"></div>
+      </nav>
+      <h3>Menu Off Canvas</h3>
+      <!-- Vamos a usar un input de tipo checked y cuando este check lo vamos a mostrar y cuando no lo este lo ocultaremos -->
+      <!-- Tanto el input, la label y la nava con el menu de navegacion tienen que ser hermanos, sino son hermanos esta técnica de programacion off-Canvas sin jS y solo CSS no va a funcionar,hermanos y en ese orden,da igual que esten en otra etiqueta o div o elemento -->
+      <input type="checkbox" class="off-canvas-btn" />
+      <label class="off-canvas-burger"></label>
+      <nav class="off-canvas-menu">
+        <!-- La div va a ser como el contenedor del menu esto nos va a permitir centrar -->
+        <div class="off-canvas-menu-container">
+          <a href="#" class="off-canvas-link" id="">Sección 1</a>
+          <a href="#" class="off-canvas-link" id="">Sección 2</a>
+          <a href="#" class="off-canvas-link" id="">Sección 3</a>
+          <a href="#" class="off-canvas-link" id="">Sección 4</a>
+          <a href="#" class="off-canvas-link" id="">Sección 5</a>
+        </div>
+      </nav>
+      <h3>Ventana Modal</h3>
+      <!-- Usaremos la propiedad target con lo de la a#id del elemento para que aparezca dicha ventana modal -->
+      <a href="#modal-1">Abrir Modal</a>
+      <article id="modal-1" class="modal">
+        <!-- Misma técnica anterior para centrar el menu supongo que sera metiendolo en un container y haciendole un buen display:flex -->
+        <div class="modal-container">
+          <a href="#cerrar" class="modal-close">X</a>
+          <h2>Esto es una ventana modal</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
+            porro modi sunt incidunt accusamus optio, fugiat similique nostrum
+            nisi nobis aspernatur! Enim laboriosam autem rerum animi molestias,
+            eveniet error at?
+          </p>
+          <ul>
+            <li><a href="">Enlace 1</a></li>
+            <li><a href="">Enlace 2</a></li>
+            <li><a href="">Enlace 3</a></li>
+            <li><a href="">Enlace 4</a></li>
+            <li><a href="">Enlace 5</a></li>
+            <li><a href="">Enlace 6</a></li>
+          </ul>
+        </div>
+      </article>
+      <h3>Star Wars Intro</h3>
+      <article class="star-wars">
+        <div class="star-wars-container">
+          <div>
+            <h2>Episode III</h2>
+            <h3>REVENGE OF THE SITH</h3>
+            <p>
+              War! The Republic is crumbling under attacks by the ruthless Sith
+              Lord, Count Dooku. There are heroes on both sides. Evil is
+              everywhere.
+            </p>
+            <p>
+              In a stunning move, the fiendish droid leader, General Grievous,
+              has swept into the Republic capital and kidnapped Chancellor
+              Palpatine, leader of the Galactic Senate.
+            </p>
+            <p>
+              As the Separatist Droid Army attempts to flee the besieged capital
+              with their valuable hostage, two Jedi Knights lead a desperate
+              mission to rescue the captive Chancellor....
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <a href="index.html#temario-css">🔼</a>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  </body>
+</html>

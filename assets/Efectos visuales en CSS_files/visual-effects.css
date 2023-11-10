@@ -1,0 +1,513 @@
+html {
+  box-sizing: content-box;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+.box {
+  border: thick solid #000;
+  margin-right: auto;
+  margin-left: auto;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 5rem;
+}
+/* Nosotros podemos aplicar sombras a las cajas ya los textos */
+.box-shadows {
+  font-size: 2rem;
+  text-align: center;
+  color: navy;
+  /* box-shadow: mov-x mov-y blur-radius spread-blur color inset/outset; */
+  /* Podemos usar las unidades de medida que prefiramos ch,rems ems,px,% etc */
+  /* Si no se especifica el valor de la sombra va a heredar el del elemento color */
+  box-shadow: -1rem -1rem 1rem 1rem;
+  /* Sombra con opacidad */
+  box-shadow: -1rem -1rem 1rem 1rem #0005;
+  /* El inset es para que la sombra sea interna y el outset es que sea externa a la caja por default es outset */
+  box-shadow: 1rem 1rem 1rem 1rem #f00 inset;
+  /* El tercer valor es como la difumiación y el cuarto como la distasncia */
+  box-shadow: 1rem 1rem 2rem 0.5rem #f00;
+
+  /* text-shadow: mov-x mov-y blur-radius color; */
+  /* Con el blur radius a 0 es como literalmente como escribir el texto y en la caja seria como mantener la forma(Se pueden hacer cosas chachis con emoticonos o formas raras) */
+  text-shadow: -1rem -1rem 0rem hotpink;
+  /* filter: drop-shadow(mov-x mov-y blur-radius color); */
+}
+
+.shadows-multiple {
+  font-size: 2rem;
+  text-align: center;
+  /* Para poner varias sombras al mismo tiempo debremos separarlas por coma como con las imagenes superpuestas. */
+  box-shadow: 1rem 1rem 1rem 1rem #0009, 1rem 1rem 1rem 1rem #f00 inset,
+    -0.5rem -0.5rem 0.5rem 2rem hotpink;
+  /* Para las sombras multiples de los textos es lo mismo: */
+  text-shadow: -1rem -1rem 0.5rem navy, 1rem 1rem 0.5rem greenyellow;
+}
+
+.drop-shadow {
+  width: 600px;
+  height: auto;
+}
+.drop-shadow img {
+  max-width: 100%;
+  height: auto;
+  /* filter: drop-shadow(mov-x mov-y blur-radius color); */
+  box-shadow: 1rem 1rem 1rem 1rem #f00;
+  /* El filter drop-shadow sirve para darle sombras a algunos tipos imagenes y deben ser png con transparencia */
+  /* El filtro de drop-shadow solo funciona 1 y se machacanpor cascada o especificidad */
+  filter: drop-shadow(1rem 1rem 1rem orangered);
+}
+
+.linear-gradient {
+  /* Es una buena practica usarlo conbackground-image y no con background aunque este ultimo tambien funcione */
+  background-image: linear-gradient(red, green);
+  background-image: linear-gradient(red, green, blue);
+  /* Como primer parametro le podemos pasar los grados, hay que definir con deg*/
+  background-image: linear-gradient(0deg, red, green, blue);
+  background-image: linear-gradient(0deg, red, green, blue);
+  background-image: linear-gradient(90deg, red, green, blue);
+  background-image: linear-gradient(180deg, red, green, blue);
+  background-image: linear-gradient(270deg, red, green, blue);
+  /* El ultimo valor va a estar en el lado que se seleccione con las palabras to ***** ***** */
+  background-image: linear-gradient(to right, red, green, blue);
+  background-image: linear-gradient(to bottom, red, green, blue);
+  background-image: linear-gradient(to bottom right, red, green, blue);
+  /* Podemos dar pocentajes para definir de que punto aque punto queremos quese vaya cambiando o transformandose */
+  background-image: linear-gradient(90deg, red 30%, green 60%, blue);
+  background-image: linear-gradient(90deg, green 33%, white 34% 67%, red 68%);
+}
+
+.radial-gradient {
+  background-image: radial-gradient(cyan, magenta);
+  background-image: radial-gradient(cyan, magenta, yellow);
+  /* Los degradados radiales pueden ser circulares o elipticos */
+  /* Las distancias en circle dicta donde empieza el degradado y lo restante es para el ultimo valor */
+  background-image: radial-gradient(circle 4rem, cyan 30%, magenta 80%, yellow);
+  /*  El at top,at bottom etc te coloca el centro del circulo en esa posición */
+  background-image: radial-gradient(
+    circle 100px at top,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  background-image: radial-gradient(
+    circle 100px at bottom,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  background-image: radial-gradient(
+    circle 100px at left,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  background-image: radial-gradient(
+    circle 100px at right,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  background-image: radial-gradient(
+    circle 100px at center,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  background-image: radial-gradient(
+    circle 100px at top left,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  background-image: radial-gradient(
+    circle 100px at top right,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  background-image: radial-gradient(
+    circle 100px at bottom right,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  background-image: radial-gradient(
+    circle 100px at left right,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  background-image: radial-gradient(
+    circle 100px,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  /* Para la elipse envede circle ponemos ellipsis,, en la elipse recordar que tenemos 2 radios uno en el eje x y otro en el eje y,por lo tanto hay que definir los valores tanto en x e y sino no funcionaria */
+  background-image: radial-gradient(
+    ellipse 50px 100px,
+    cyan 30%,
+    magenta 60%,
+    yellow 90%
+  );
+  /* Si el blanco empieza justo cuando acaba el rojo, parece ser que el ultimo valor no degrada El primer valor que es el rojo tiene por defecto 0% en el primero ya que aunque en este haya solo un valor este hace referencia hasta donde llega partiendo desde el 0 ya que es el primero, respecto a los demas valores hacen referencia desde el 50% hasta el 100% este ultimo no hace falta ponerlo porque el blanco es el ultimo valor pasa lo contrario que con el primer valor pero al reves ya que el 50% del primer valor hace referencia hasta donde es rojo y el 50%white hace referencia desde donde es blanco.*/
+  background-image: radial-gradient(circle 100px, red 50%, white 50%);
+}
+
+.conic-gradient {
+  background-image: conic-gradient(red, green, blue);
+  background-image: conic-gradient(red 0% 50%, green 60%, blue 80%);
+  /* Cuando solo es un valor es donde acaba no donde empieza para los conicos */
+  background-image: conic-gradient(
+    red 0deg 90deg,
+    green 120deg 240deg,
+    blue 270deg
+  );
+  /* El from hace referencia desde donde empiezan a contar los grados */
+  background-image: conic-gradient(
+    from 90deg,
+    red 0deg 90deg,
+    green 120deg 240deg,
+    blue 270deg
+  );
+  background-image: conic-gradient(
+    from 180deg,
+    red 0deg 90deg,
+    green 120deg 240deg,
+    blue 270deg
+  );
+  background-image: conic-gradient(
+    from 270deg,
+    red 0deg 90deg,
+    green 120deg 240deg,
+    blue 270deg
+  );
+  background-image: conic-gradient(
+    from 360deg,
+    red 0deg 90deg,
+    green 120deg 240deg,
+    blue 270deg
+  );
+  background-image: conic-gradient(
+    from 90deg,
+    red 0deg 120deg,
+    white 120deg 240deg,
+    blue 240deg
+  );
+}
+
+.repeat-gradient-linear {
+  background-image: repeating-linear-gradient(
+    red 0 10px,
+    green 10px 20px,
+    blue 20px 30px
+  );
+  background-image: repeating-linear-gradient(
+    45deg,
+    red 0 10px,
+    green 10px 20px,
+    blue 20px 30px
+  );
+  background-image: repeating-linear-gradient(
+    90deg,
+    red 0 10px,
+    green 10px 20px,
+    blue 20px 30px
+  );
+}
+.repeat-gradient-radial {
+  background-image: repeating-radial-gradient(
+    circle 4rem,
+    cyan 0 10px,
+    magenta 10px 20px,
+    yellow 20px 30px
+  );
+}
+
+.repeat-gradient-conic {
+  background-image: repeating-conic-gradient(
+    red 0 8%,
+    yellow 8% 16%,
+    black 16% 24%
+  );
+}
+.chart-gradient {
+  background-image: conic-gradient(cyan 0 50%, magenta 50% 80%, yellow 80%);
+  /* Con esto y un border radius del 50% podemos */
+  border-radius: 50%;
+}
+.donut-gradient {
+  /* Se hace superponiendo 2 fondos de background-image */
+  /* Vale aqui hacemos el circulo de arriba pero hacemos un ciculo del centro hacia fura es decir radial que del 0 hasta el 40% sea blanco y luego transparente a partir del 40% y al ser transparente se veria el conic gradient, el radio de color negro es para darle como un borde interior */
+  background-image: radial-gradient(white 40%, black 41%, transparent 43%),
+    conic-gradient(cyan 0 50%, magenta 50% 80%, yellow 80%);
+
+  border-radius: 50%;
+}
+
+.card {
+  border: thick solid #000;
+  margin-right: auto;
+  margin-left: auto;
+  width: 600px;
+  height: 400px;
+  margin-bottom: 5rem;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 50%;
+}
+.filterestudio {
+  width: 100%;
+  height: 100%;
+  /* object-fit pasa decontain a cover para que de esta manera tenga las proporciones correctas aunque te meta zoom se vea  mejor */
+  object-fit: cover;
+  object-position: 0 50%;
+  /* los filtros se aprecian mejor cuando se dan a una imagen */
+  /* Blur es como el desenfoque */
+  filter: blur(1rem);
+  filter: blur(0.15rem);
+  /* brightness es la intensidad de la luz,los valores van desde 1 que es la foto normal hasta 0 que es oscuro total ( */
+  filter: brightness(1);
+  filter: brightness(0.75);
+  filter: brightness(0.5);
+  filter: brightness(0.2);
+  filter: brightness(0);
+  /* Si los valores son superiores a 1 la foto se quema es decir aumenta su brillo */
+  filter: brightness(1);
+  /*  El contraste recuerda que tiene que ver con la escala de grises , recordar que 1 es normal y 0 es gris todo, si ponemos números superiores a 1 la imagen se sobresatura. */
+  filter: contrast(1);
+  filter: contrast(1);
+  /* GrayScale tiene que ver con los grises es como meterle un color por ejmplo sepia,si es igual a 1 no hay colores solo la imagen en gris */
+  filter: grayscale(0.75);
+  /* Otro filtro parecido como bien he dicho antes es el filtro de sepia,usa los amarillos para llegar a este efecto 0 significa que no se aplica y 1 seria la sepia con su valor máximo,depende de la calidad y los tonos de la imagen */
+  filter: sepia(1);
+  /* Utiliza el circulos de colores donde el rojo era el 0deg */
+  filter: hue-rotate(0deg);
+  filter: hue-rotate(30deg);
+  filter: hue-rotate(60deg);
+  filter: hue-rotate(90deg);
+  filter: hue-rotate(120deg);
+  filter: hue-rotate(270deg);
+  filter: hue-rotate(350deg);
+  /* Invert es la inversión lo que hace es invertir los colores, en este caso 1 son colores frios ya que son calidos de base en esta foto */
+  filter: invert(0.78);
+  /* Opacidad siendo mas o menos opaco siendo 1 el máximo */
+  filter: opacity(0.3);
+  filter: opacity(1);
+  /* Luego el filtro de la saturacion de las escalas de grises 0 es muy grsaceo y por encima de 1 se sobresatura como con el contrast pero supongo que de colores de una forma diferente */
+  filter: saturate(1.2);
+  /* Se puede aplicar sombras con drop-shadow como con las imagenes pero al no ser png solo se aplicara la sombra a su recuadro no alaimagen en si */
+  filter: drop-shadow(1rem 1rem 1rem steelblue);
+}
+
+.filter {
+  filter: invert(1);
+}
+
+.filters-multiple {
+  /* No olvidar las medidas con blur */
+  filter: blur(0.1rem) hue-rotate(270deg) opacity(0.75) invert(1);
+}
+
+.relative {
+  /* Porque necesito que la card tenga posicionamiento relativo?Porque la div que tengo debajo la voy a posicionar con absolute */
+  position: relative;
+}
+.absolute {
+  /* A ver esto es simple aqui tenemos 2 imaagenes dentro del article que tiene la class relative y mi segunda foto le ponemos la absolute con position con estos valores para que la aplaste en primer lugar */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* Lo que necesitaremos esque nuestra div este por encima de nuestra card */
+.backdrop-filter,
+.backdrop-filter-multiple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Al darle un 100% de width y un 100 de height ocuparia todo el espacio del article,Aqui usaremos flexbox para centrar */
+  width: 100%;
+  height: 100%;
+  /* Da igual si aplicas un display en columna o en fila ya que solo tiene un elemento,para mas estudiar su curso de flexbox y grid */
+  display: flex;
+  /* Como no he cambiado la direccion del flexbox el eje principal es x por eso usaremos justify-content:center */
+  justify-content: center;
+  /* Y align-items me lo centraria en el eje Y */
+  align-items: center;
+  /* Tambien debemos si auqremos centrar el texto con text-align:center */
+  text-align: center;
+}
+
+.backdrop-filter h4 {
+  font-size: 3rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  color: #000;
+  background-color: rgba(255, 102, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
+  /* Ahora es cuando aplicamos el backdrop-filter que serian los filtros sobre los fondos,podemos applicar casi cualquier filtro de los anteriores */
+  backdrop-filter: grayscale(1);
+  backdrop-filter: sepia(1);
+  backdrop-filter: opacity(0.25);
+  backdrop-filter: hue-rotate(180deg);
+  /* Blur esta muy guapo */
+  backdrop-filter: blur(0.5rem);
+}
+.backdrop-filter-multiple h4 {
+  border-radius: 1rem;
+  font-size: 3rem;
+  padding: 2rem;
+  color: white;
+  background-color: rgba(255, 102, 255, 0.5);
+  /* Aqui le plicaremos varios efectos,tantos como queramos */
+  backdrop-filter: blur(1rem) hue-rotate(270deg) opacity(0.75) invert(1);
+}
+
+.dark-mode {
+  background-color: #fff;
+  color: #000;
+  /* El invert hace que va al contrario en la rueda de los colores de blanco en este caso pasa a negro,esto es para hacer un dark-mode pocho,para que esto funcione hay que definir exolicitamente el background-color y el color de la letra,afecta a todo y te la lia,si hay  una doble inversion vuelve a la original */
+  filter: invert(1);
+}
+.dark-mode img {
+  filter: invert(1);
+}
+
+.blend-modes img {
+  /* El efecto de blend-mode no debemos darselo a la card sino a las img que estan dentro */
+  /* mix-blend-mode: normal; */
+  /* Normal no hace nada y como predomina la del perro se queda igual */
+
+  /* Con el valor color hace una fusión */
+  /* mix-blend-mode: color; */
+  /* Color dodge es un poco mas intenso */
+  /* mix-blend-mode: color-dodge; */
+  /* Color burn sobre satura los colores */
+  /* mix-blend-mode: color-burn; */
+  /* mezcla las dos imagenes  */
+  /* mix-blend-mode: screen; */
+  /* Multiply que es la multiplicacion, no se que leches es eso pero bueno no esta mal el efecto en la media */
+  /* mix-blend-mode: multiply; */
+  /* Con saturacion */
+  /* mix-blend-mode: saturation; */
+  /* Con luminosidad */
+  /* mix-blend-mode: luminosity; */
+  /* hue se parece a saturacion pero rarete */
+  /* mix-blend-mode: hue; */
+  /* Exculusion se estan excluyendo algunas areas */
+  /* mix-blend-mode: exclusion;
+  mix-blend-mode: hard-light;
+  mix-blend-mode: soft-light;
+  mix-blend-mode: lighten;
+  mix-blend-mode: overlay; */
+  mix-blend-mode: darken;
+  /* Asi como a imagenes normales se pueden superponer de estas maneras */
+}
+
+.bg-blend-modes {
+  /* La imagen que predomina es la primera */
+  background-image: url(../assets/puesta-sol.jpg), url(../assets/BuenosDias.jpg);
+  /* Cover para que este bien asimilada 
+  Igual que en imagenes normales*/
+  /* background-size: cover;
+  background-blend-mode: normal;
+  background-blend-mode: color;
+  background-blend-mode: color-dodge;
+  background-blend-mode: color-burn;
+  background-blend-mode: screen;
+  background-blend-mode: saturation;
+  background-blend-mode: luminosity;
+  background-blend-mode: hue;
+  background-blend-mode: difference;
+  background-blend-mode: darken;
+  background-blend-mode: overlay;
+  background-blend-mode: lighten;
+  background-blend-mode: soft-light;
+  background-blend-mode: hard-light;
+  background-blend-mode: exclusion;
+  background-blend-mode: darken; */
+  background-blend-mode: multiply;
+}
+
+.clip-path {
+  /* Circulo de la fotografia,debe estar dentro de un article  */
+  /* clip-path: circle();
+  clip-path: circle(2rem); */
+  /* por default siempre va a empezar desde el centro el enmascaramiento */
+  /* clip-path: circle(100px); */
+  /* puedess posicionarlo: */
+  /* clip-path: circle(100px at top);
+  clip-path: circle(100px at left);
+  clip-path: circle(100px at right);
+  clip-path: circle(100px at bottom);
+  clip-path: circle(100px at left bottom);
+  clip-path: circle(100px at right bottom);
+  clip-path: circle(100px at left top);
+  clip-path: circle(100px at right top); */
+  /* Tambien se puede mover con coordenadas */
+  /* clip-path: circle(100px at 0 0); */
+  /* Si yo le pongo un % pone al 30% del tamaño de la tarjeta tanto en x como en y */
+  /* clip-path: circle(100px at 30%); */
+  /* Si especificas 2 valores el primero es para x y el segundo es para y */
+  /* clip-path: circle(100px at 18% 60%); */
+  /* Tambien se pueden hacer ellipses */
+  /* clip-path: ellipse(); */
+  /* Los primeros 2 valores son para el radio el primer valor para x y el segundo para y */
+  /* clip-path: ellipse(1rem 2rem);
+  clip-path: ellipse(2rem 1rem);
+  clip-path: ellipse(100px 50px);
+  clip-path: ellipse(100px 50px at left);
+  clip-path: ellipse(100px 50px at right);
+  clip-path: ellipse(100px 50px at top);
+  clip-path: ellipse(100px 50px at bottom);
+  clip-path: ellipse(100px 50px at left bottom);
+  clip-path: ellipse(100px 50px at right bottom);
+  clip-path: ellipse(100px 50px at left top);
+  clip-path: ellipse(100px 50px at right top);
+  clip-path: ellipse(100px 50px at 0 0);
+  clip-path: ellipse(100px 50px at 300px 50px);
+  clip-path: ellipse(100px 50px at 18% 60%); */
+  /*  si le doy 2 rem es como si lehubiese dado un padding de caja de 2rem */
+  /* clip-path: inset(2rem); */
+  /* 2 valores top y bottom ,3valores top left-right bottom  y 4 valores manecillas reloj desde el top */
+  /* clip-path: inset(2rem 1rem);
+  clip-path: inset(3rem 2rem 1rem);
+  clip-path: inset(3rem 2rem 1rem 0.5rem); */
+  /* Podemos bordear independientemente primero colocamos el tambaño de padding y luego el round con el redondeo que queramos  */
+  /* clip-path: inset(1rem round 1rem);
+  clip-path: inset(1rem round 2rem 2rem);
+  clip-path: inset(1rem round 2rem 2rem 3rem 4rem); */
+  /* Tambien tenemos una funcion para hacer poligonos necesita parametros,hay que definir los nodos, se  escriben  con 2 numeros luego otroluego coma luego otro, asi astas terminar con tu poligono  */
+  /* Hay herramientas que te lo calculan, poniendo en google clip-path genereitor */
+  /* clip-path: polygon(0 0, 100% 0, 50% 100%); */
+  /* Estrella de la web */
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+
+.shapes {
+  border: thick solid black;
+  padding: 1rem;
+  margin: 0 auto 5rem;
+  max-width: 800px;
+}

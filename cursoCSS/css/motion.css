@@ -1,0 +1,896 @@
+html {
+  box-sizing: content-box;
+  font-family: sans-serif;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+}
+
+.box {
+  border: thick solid #000;
+  margin-right: auto;
+  margin-left: auto;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 5rem;
+}
+
+.card {
+  border: thick solid #000;
+  margin-right: auto;
+  margin-left: auto;
+  width: 600px;
+  height: 400px;
+  margin-bottom: 5rem;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 50%;
+}
+
+/* Transiciones
+  transition-property->Que   
+    propiedad es a la que quiero aplicar una transición.
+  transition-duration->   
+    cuanto tiempo va a durar mi transición se mide en ms o s.
+  transition-timing-funtion:linear ease ease-in ease-out ease-in-out steps none-> Como va a ser la    
+    forma de como se va  a desarrollar la transicion
+  transition-dealy-> Un 
+    tiempo de espera antes de que empieza la transicion en ms o s
+  Luego la shorthand
+  trasition: property duration timing-function delay
+ */
+/* Hay algunas propiedads que no son animables,
+  las animables son: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties*/
+.transitions .box {
+  background-color: magenta;
+  border-color: green;
+  /* Al poner las propiedades aqui afecta tanto a cuando tiene el hover como cuando se lo quitas por ejemplo pasaria a color magenta a cyan en 500ms de transicion y al reves igual, si se coloca en el estado hover solo funcionara con estos parametros para la ida y no la vuelta */
+  transition-property: background-color;
+  transition-duration: 500ms;
+  transition-timing-function: ease;
+  transition-delay: 0.5s;
+  /* Por cascada la anterior transition se machaca cuidado */
+  transition: border-color 2s linear 1s;
+  /* Esta tecnica sirve para que funcionen varias a la vez pero, hay que tener cuidado y no abusar,aunque la mala practica en realidad no es el all si no aplicar un monton de transiciones aun mismo elemeto, el all afecta a todos, tambien al padding etc y cuando carga te lo modifica */
+  transition: all 2s ease-out 250ms;
+  /* El all no me serviria si para cada transicion tuviese un tiempo ,manera y retarde diferente entre ellas */
+  transition: background-color 2s ease-in-out 250ms,
+    border-radius 2s ease-in-out 250ms, border-color 2s ease-in-out 250ms;
+}
+.transitions .box:hover {
+  background-color: cyan;
+  border-color: red;
+  border-radius: 2rem;
+
+  /* border-style: dashed; */
+}
+
+.transitions .card {
+  /* Lo de steps como ir haciendo huellas */
+  transition: opacity 1s ease-out, border-color 3s steps(3),
+    filter 2s ease-in 1s, box-shadow 1.5s linear 2s;
+}
+.transitions .card:hover {
+  opacity: 75%;
+  border-color: orchid;
+  filter: blur(0.15rem);
+  box-shadow: 1rem 1rem 2rem 0.5rem #000;
+}
+/* Asi se desplazaria, pero al empezar no estaria centrada */
+.transitions .card img {
+  transition: object-position 2s ease-in-out 3s;
+}
+.transitions .card img:hover {
+  object-position: 100% 50%;
+}
+/* Aplicamos la tranformacion no sobre la card sino sobre la imagen de la card para que esta quede estatica y se vean las transformaciones */
+.transform-2d img {
+  transition: transform 2s ease-in-out;
+}
+
+.transform-2d img:hover {
+  /* transform: none;  default */
+
+  transform: translateX(4rem);
+  transform: translateY(4rem);
+  transform: translateY(-4rem);
+  transform: translateZ(4rem);
+  transform: translate(-4rem, 4rem);
+  /* Si ponemos en % esto hace referencia al tamaño de la imagen que se va a mover en este caso si que existen los % negaivos que hacen referencia haciaarriba y hacia la izquerda ,valor positivo de la y que es el segundo valor significa hacia abajo y por ende el negativo hacia arriba */
+  transform: translate(-50%, -50%);
+  transform: translate(-50%, 2rem);
+  transform: translate(-50%, 100px);
+  /* Aqui se ensanchaa 2 veces el tamaño de lo que estamos transformando en este caso la imagen, la transformacion se machaca por cascada */
+  transform: scaleX(2);
+  transform: scaleY(0.5);
+  transform: scaleZ(0.5);
+  transform: scale(1.5, 1.5);
+  /* Para girarlo voltearlo etc */
+  transform: scale(0.5, -0.5);
+  /* Ahora tambien tenemos rotacion, Aqui podemos usar grados,radianes pero mejor grados, la imagen rota respecto al eje dado en plan como un plano */
+  transform: rotateX(60deg);
+  /* Rotate Y es respecto eje Y */
+  transform: rotateY(90deg);
+  transform: rotateZ(360deg);
+  /* Rotate Z y rotate es la misma funión */
+  transform: rotate(360deg);
+  transform: rotate(-360deg);
+  /* ske, valor hacia la dderecha deben ser en grados negativos,skew es estirar  */
+  transform: skewX(-30deg);
+  transform: skewX(-60deg);
+  transform: skewY(60deg);
+  transform: skew(20deg, 20deg);
+  /* Tambien hay una propiedad que es matrix que es bien loca:
+  matrix(scaleX(),skewY(),skewX(), scaley(),translateX(), translateY())
+  tiene mucha carga,senos,cosenois,tangentes etc:
+  https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix3d */
+  transform: matrix(1, 2, 2, 1, 20, 10);
+  /* Usar transformaciones  vaias */
+  transform: translate(25%, -50%) rotate(240deg) skew(10deg, 20deg)
+    scale(-0.5, -0.5);
+}
+.transform-3d {
+  perspective: 10rem;
+}
+.transform-3d img {
+  transition: transform 2s ease-in-out;
+}
+
+.transform-3d img:hover {
+  /* Eje de profundidad */
+  transform: translateZ(4rem);
+  /* La perspectiva 3d se tiene que aplicar desde el elemento padre, es el article y la otra opción es antes de la funcion de transformación que quiero aplicar,aplicar la funcion de perspectiva */
+  transform: perspective(1000px) translateZ(4rem);
+  /* Cuanto mayor es el número de dicha perspectiva mas lento es el efecto, manejar una perspectiva base de 10rems */
+  transform: perspective(10rem) translateZ(-4rem);
+  transform: translateZ(4rem);
+  /* VAlor en x,y,z,cualquier unidad de medida */
+  transform: translate3d(2rem, 50%, -3rem);
+  /* Solo funciona con volumenes */
+  transform: scaleZ(1.5);
+  /* valores de x,y,z */
+  transform: scale3d(2, 0.5, 3);
+  transform: rotateX(60deg);
+  transform: rotateY(90deg);
+  /* Para entender rotate3d-> https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotate3d */
+  transform: rotate3d(1, 0.5, 0, -45deg);
+  transform: rotate3d(1, 2.5, -2, 60deg);
+  /* La matrix3d tiene 16 valores, matriz 4x4  
+  https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix3d*/
+  transform: matrix3d(1, 0, 0, 0, 0, 1, 6, 0, 0, 0, 1, 0, 50, 100, 0, 1.1);
+  /* Transformaciones multiples: */
+  transform: rotate3d(-1, 2.5, -2, 60deg) translate3d(2rem, 50%, -3rem)
+    scale3d(2, 0.5, 3);
+}
+
+.transform-origin img {
+  transition: transform 2s ease-in-out;
+  /* Aqui vamos a cambiar el origen de la transformación */
+  /* transform--origin: x,y,z;*/
+  transform-origin: 50% 50% 0; /* default origen */
+  /* Cuando estas en 2dimensiones con 2 valores seria suficiente,empieza desde la esquina superior izquierda */
+  transform-origin: 0 0;
+  /* Si aolicamos un valor solamente hara efecto sobre x y las demas y ,z estaran en su posicion de default */
+  transform-origin: 0;
+  transform-origin: top left;
+  transform-origin: top right;
+  transform-origin: top center;
+  transform-origin: bottom center;
+  transform-origin: bottom left;
+  transform-origin: bottom right;
+  transform-origin: center right;
+  transform-origin: center left;
+  transform-origin: center center;
+  transform-origin: -2rem;
+  transform-origin: 2rem 3rem;
+  transform-origin: 2rem 75%;
+  transform-origin: 25% 75%;
+  transform-origin: -5% -5%;
+  transform-origin: 30%;
+}
+.transform-origin img:hover {
+  transform: rotate(360deg);
+}
+
+/* Vamos a hacer alguna practica por ejemplo una card con frontal y trasera */
+.flip-card-1,
+.flip-card-2 {
+  border: thick solid #000;
+  margin-right: auto;
+  margin-left: auto;
+  width: 600px;
+  height: 400px;
+  margin-bottom: 5rem;
+  position: relative;
+  cursor: pointer;
+  transition: transform 1s ease-in-out;
+  /* Hacemos 3dimensiones a traves del ancestro acuerdate que habia 2 maneras!! */
+  perspective: 10rem;
+  /* Tambien hay que añadir el transform-style, esta propiedad va a establecet si los hijos de un  elemento que tiene perspectiva para las 3dimensiones como se van a comportar */
+  /* Con flat es que en el mismo plano que el padre trabajen los elementos hijos */
+  /* transform-style: flat; */
+  /* Si nosotros queremos que de manera independiente tengan una perspectiva adicional indepediente  a los del padre usaremos preserve-3d */
+  transform-style: preserve-3d;
+}
+.flip-card-1 img,
+.flip-card-2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 50%;
+}
+.flip-card-2 {
+  /* Efecto que se vea que voltea como efecto de flip,esto hace que la rotaciion sea en el centro a la derecha pero en la clase .flip-card-2:hover se mueve hacia la izquierda el 100% del contenedro y a la vez voltea respecto al eje Y 180º viendose la parte de atrads */
+  transform-origin: center right;
+}
+.flip-card-1:hover {
+  transform: rotateY(180deg);
+}
+.flip-card-2:hover {
+  transform: translateX(-100%) rotateY(180deg);
+}
+.flip-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* Back face visibility,esta propiedad determina que las caras,es decir cuando tienes 2 lados determina como se van a ver esas caras   */
+  backface-visibility: visible;
+  /* por defecto */
+  /* Este efecto no funciona sobre 2 dimensiones, eso siginifica que necesitamos la perspectiva Z o 3dimensiones */
+
+  backface-visibility: hidden;
+  /* por defecto */
+}
+/* Esto es para pegar donde va cada una respecto al eje Y,por defecto estarian a 0deg pero se lo ponemos por si acaso */
+.flip-front {
+  /* Aqui es indiferente si se lo ponemos o no se lo ponemos */
+  transform: rotateX(0deg);
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Animaciones */
+
+/* Que se necesita para animar un CSS ? un selector al cual le añadamos las propiedades de animacion  */
+
+/* Como representamos lalinea de tiempo de una animacion -> con las @keyframes */
+@keyframes myAwesomeAnimation {
+  /* Necesitamos un punto de partida de inicio y un punto de partida final, es decir un fotograma de inicio y un fotrograma final,adicionalmente podemos meter fotogramas intermedios pero eso lo veremos despues */
+  /* Fotograma inicial from */
+  from {
+    opacity: 0;
+    transform: translateX(0);
+    /* transform: rotateY(0deg); */
+  }
+  /* Fotograma final to */
+  to {
+    opacity: 1;
+
+    transform: translateX(100%);
+    /* transform: rotateY(180deg); */
+  }
+}
+.my-animation {
+  /* Podemos usar el shorthand animation:  */
+  /* animation: name duration timing-function delay iteration-count direction fill-mode play-state(running-pause),normalmente se pausa por javascript no por CSS; */
+  /* Las 2 que son obligatorias son name y duration */
+  /* animation-name:myAwesonmeAnimation */
+  animation-name: myAwesomeAnimation;
+  animation-duration: 2s; /* pueden ser en ms o en s como prefieras */
+  /* https://cubic-bezier.com/ */
+  /* Los 2 primeros son para el primer nodo y los 2 segundos los del segundo nodo */
+  animation-timing-function: cubic-bezier(0.33, 0.92, 0.92, 0.36);
+  animation-timing-function: ease-in-out;
+  animation-delay: 1500ms;
+  animation-delay: 1;
+  animation-iteration-count: 3;
+  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
+  /*normal hace que empiece desde el principio */
+  animation-direction: normal;
+  /* reverse empieza desde el final y va al principio */
+  animation-direction: reverse;
+  /* alternate empieza al inicio y llega al final y desde el final vuelve al principio, es una ida y venida */
+  animation-direction: alternate;
+  /* Por ultimo teniemos alternate-reverse que empieza por el final va al principio y vuelve al final */
+  /* para tanto reverse como para alternate-reverse tiene que haber minimo* 2 iteraciones sino no se vera bien; */
+  animation-direction: alternate-reverse;
+  /* al final de la animacion se queda con los estilos finales de la animación */
+  animation-direction: normal;
+  animation-fill-mode: none;
+  /* forwards hace que se quede con los estilos finales, si recargas la pagina vuelve al inicio ojo* */
+  animation-fill-mode: forwards;
+  animation-fill-mode: backwards;
+  animation-fill-mode: none;
+  /* Con backwards evitamos el salto bursco de la animacion, es decir aparece ya moviendose y cambiando su opacidad */
+  animation-fill-mode: backwards;
+  /* both es la combinacion de forwards que se queda con los estilos del final de la animación y la de backwards para evitar el salto brusco del inicio de la animación */
+  animation-fill-mode: both;
+  /* Esta propiedad play-state se usa con javascript, por ejemplo cuando pulse un boton se active dicha propiedad de pause o running */
+  animation-play-state: running;
+  animation-play-state: paused;
+  /* shorthand animation */
+  animation: myAwesomeAnimation 1.5s ease 250ms 7 alternate both running;
+}
+@keyframes myAwesomeAnimation2 {
+  /* Esto nos da 101 fotogramas posibles en CSS contando el 0% y el 100% */
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%);
+  }
+  75% {
+    transform: translateX(-75%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(100%);
+  }
+}
+.my-animation-2 {
+  animation: myAwesomeAnimation2 5s;
+  animation: myAwesomeAnimation2 2s;
+}
+@keyframes multipleAnimation1 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes multipleAnimation2 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.animation-multiple {
+  /* animation: multipleAnimation1 2s infinite; */
+  /* animation: multipleAnimation2 2s infinite; */
+  /* Por cascada la rompe,para ahcer varias aniamciiones-->como las transiciones */
+  animation: multipleAnimation1 2s ease-in-out,
+    multipleAnimation2 1s ease-in-out;
+}
+
+.motion-examples {
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.fade-in {
+  font-size: 5vw;
+  animation: fadeIn 2s linear 2s infinite alternate;
+}
+.fade-out {
+  font-size: 5vw;
+  animation: fadeOut 2s linear 2s infinite alternate;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate(-1px, 0);
+  }
+  20%,
+  80% {
+    transform: translate(2px, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate(-4px, 0);
+  }
+  40%,
+  60% {
+    transform: translateX(4px, 0);
+  }
+}
+
+.shake {
+  font-size: 5vw;
+  cursor: pointer;
+  /* como el efecto aplica a toda la caja conviene hacerlo inlineblock para que solo sea ese huevo y no toda la linea horizontal que ocupa dicha elemento de bloque */
+  display: inline-block;
+}
+/* En el estado hover le aplicamos la animación */
+.shake:hover {
+  animation: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  transform: translate(0, 0);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.pulse {
+  font-size: 5vw;
+  animation: pulse 1s linear infinite;
+}
+
+@keyframes heartColor {
+  10% {
+    background-color: #d00;
+  }
+}
+.heart {
+  /*muchos de los elementos que creamos en CSS nos ayudamos  del:before :after para muchas cosas, aqui vamos a hacer que la caja heart tenga la position absolute para que despues hagamos 2 cajas dentro una before y otra after que esten rotadas con su clase relative para que quede por encima de la caja heart formando un corazon con CSS */
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10vw;
+  /* En este caso tanto en la anchura como en la altura usaremos vw misma medida ya que asi aseguraremos un cauadrado que nos facilitara hacer dicho corazón */
+  height: 10vw;
+  /* background-color: #888; */
+  animation: pulse 1s infinite;
+}
+
+/* Ahora las partes del corazon vamos a sacarlas con las clases del pseudoelmento::before y ::after */
+.heart::after,
+.heart::before {
+  position: absolute;
+  /* Cuando usamos los pseudoelementos after y before hay que ponerle el atributo content para escribir delante y detras  */
+  content: "";
+  left: 5vw;
+  top: 0;
+  width: 5vw;
+  height: 8vw;
+  background-color: #a00;
+  /* Ponemos asi porque cambiamos el origen de la transformación,por eso le ponemos -45deg aqui y +45dge abajo */
+  transform: rotate(-45deg);
+  transform-origin: 0% 100%;
+  border-radius: 5vw 5vw 0 0;
+  animation: heartColor 1s infinite;
+}
+/* Aqui mas fuerza por cascada */
+.heart::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* Ahora dibujaremos un spinner */
+
+/* Aqui en el @keyframes solo tenemos que jugar con la rotacion del elemento */
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  /* Primero vamos a darle un background para ver nuestra caja y poder ir modificandola, posteriormente se lo quitaremos o no,dependera de como se vea mejor */
+  /* background-color: #d00; */
+  /* Intentaremos ponerle el mismo tipo de medida para que la caja sea un cuadrado,en este caso */
+  width: 5vw;
+  height: 5vw;
+  /* Para centrar la div recordar margin-left:auto y margin-right: auto */
+  margin-left: auto;
+  margin-right: auto;
+  /* border-radius de al menos el 50% para que sea un circulo */
+  border-radius: 50%;
+  border: 0.5vw solid rgba(0, 0, 0, 0.1);
+  border-top-color: #09f;
+  /* En ease-in-out la velocidad es mas rapida al principio y mas lenta al final */
+  animation: spinner 1s ease-in-out infinite;
+}
+
+/* Vamos a hacer las animaciones con los psudoelmentos after y before, por lo tanto a la class .btn vamos a darle la position relative, para poder darle position relative a los demas */
+
+.btn {
+  position: relative;
+  border: none;
+  border-radius: 0.25rem;
+  width: 15rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0.25rem 0.25rem 0.5rem 0.25rem rgba(0, 0, 0, 0.15);
+}
+
+.anim-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0.25rem;
+  background-color: #d00;
+  transition: width 0.5s ease, left 0.5s ease, right 0.5s ease;
+}
+.anim-bottom:hover::after {
+  width: 100%;
+}
+
+.to-left::after {
+  left: 0;
+}
+.to-center::after {
+  left: 50%;
+
+  /* right: 50%; */
+}
+.to-center:hover::after {
+  left: 0%;
+
+  /* right: 50%; */
+}
+
+.to-right::after {
+  right: 0;
+}
+
+.anim-bg-gradient {
+  /* Los gradientes acuerdate que es en la propiedad background-image */
+  background-image: linear-gradient(to right, pink, violet, orange, orangered);
+  /* Aqui extendemos el gradiente al 300% lo que lo estiraria su gama y nos quedariamos con la parte izquierda que es la mas rosa y violeta */
+  background-size: 300% 100%;
+  transition: background-position 0.5s ease-in-out;
+}
+
+.anim-bg-gradient:hover {
+  /* Aqui le decimos que pasemos a la parte del 100% del boton es decir que al ser el background size un 300% de tamaño de base se colocara entre el 200% y 300% ,posteriormente le haremos una transition */
+  background-position: 100% 0%;
+}
+
+.tabs-menu {
+  /* Como vamos a manipular el menu este debe tener posicionamiento relativo */
+  position: relative;
+  /* Hay que ver la importancioa de manipular, el uso del posicionamiento relativo */
+  /* Primero lo centramos, marin-left: auto margin-right: auto */
+  margin-left: auto;
+  margin-right: auto;
+  /* padding: 1rem; */
+  border-radius: 1rem;
+  width: 90%;
+  height: 3rem;
+  /* Ahora para alinear los elementos aplicaremos flexbox a grandes rasgos */
+  /* Cuando tu le das display flex a una caja sus elementos hijos trabajan en una linea horizontal en fila */
+  display: flex;
+  /* Hay una propiedad que se llama justify-content que controla la alineacion en el eje principal en este caso x */
+  justify-content: space-between;
+  /* Para vertical usaremos la propiedad align-items */
+  align-items: center;
+  background-color: #ddd;
+}
+/* Primero quitamos los radios de nuestro inputs con un display:none  */
+.tabs-menu input[type="radio"] {
+  display: none;
+}
+/* Ahora tras hacer eso deberemos volver a centrar el contenido que ha dejaddo los checks radios */
+.tabs-menu label {
+  position: relative;
+  /* Ahora queremos que la label este por encime y para ello le pondremos posteriormente al position:relative un z-indexde 1,para que el elemento siempre este sobre el fondo del tab-bg-hover */
+  z-index: 1;
+  /* Podriamos guardar el numero en una variable y al modificar esta se reestrablecerian las anchuras apra cada elemento,le restamos el -0.5rem por el padding que le habiamos dado anteriormente */
+  width: calc(100% / 5);
+  /* Para que se alineen hay que definirle una propiedad */
+  text-align: center;
+  cursor: pointer;
+}
+
+.tabs-menu label:hover {
+  color: #fff;
+}
+/* los inputs de tipo radio, cuando lo checke afectara a su label vinculado a traves del id del input con el atributo for de la label,aqui con el mas(+) es que afecta a la primera etiqueta hermana adyacente
+/* El selector de hermanos adyacentes (+) que coincida con nuestro selector de referencia que este inmediatamente debajo solo el primero,claro y al ser checkbox dentro de una nav, al seleccionar 1 u otro al no poder ser a la vez solo habra un inoput checked y a su primera hermana adyacente label le dara el color blanco mientras este el checked en su input hermano anterior   */
+.tabs-menu input[type="radio"]:checked + label {
+  color: #fff;
+}
+
+.tab-bg-hover {
+  position: absolute;
+  /* El ancho tambien lo calculare con el ancho de la etiqueta ya que debe estar sobre esta */
+  width: 20%;
+  height: 2rem;
+  /* border de 0.5rem a los 4 esquimas */
+  border-radius: 0.5rem;
+  /*Vamos a ahcer un fondo con gradiente para ello background-image  */
+  background-image: linear-gradient(90deg, #a00, #d00);
+  transition: transform 300ms ease-in-out;
+  /* Como lo muevo? recuerda que los inputs tienen un id que tambien servian para enlazar la label a traves del for con id del input,aunque es un antiipatron maquetar con id, pero cuando queremos este tipo de efectos o/y movimientos,tipo menu de navegación movil */
+}
+
+#tab-1:checked ~ .tab-bg-hover {
+  transform: translateX(0);
+}
+#tab-2:checked ~ .tab-bg-hover {
+  transform: translateX(100%);
+}
+#tab-3:checked ~ .tab-bg-hover {
+  transform: translateX(200%);
+}
+#tab-4:checked ~ .tab-bg-hover {
+  transform: translateX(300%);
+}
+#tab-5:checked ~ .tab-bg-hover {
+  transform: translateX(400%);
+}
+
+.off-canvas-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 999;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  /* El checkbox va a tener una opacidad de 0 y lo que se va a ver es la label con forma de hamburguesa (engaño visual) */
+  opacity: 0;
+}
+
+.off-canvas-burger {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 998;
+  width: 3rem;
+  /* Porquen 0,6? porque al final van a ser 3 lineas de la hamburguesa con 2 huecos entre estas 0,6*5=3->0,6 */
+  height: 0.6rem;
+  background-color: #d00;
+  border-radius: 0.3rem;
+  transform: rotate(0deg) translate(0, -1.2rem);
+  transform-origin: top left;
+  transition: transform 500ms ease, background-color 500ms ease;
+}
+/* La linea de arriba y la de abajo la vamos a crear con la pseudoclases ::after y ::before */
+
+.off-canvas-burger::before,
+.off-canvas-burger::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0.6rem;
+  background-color: #d00;
+  border-radius: 0.3rem;
+  transition: transform 500ms ease;
+}
+/* Ahora solo hay que moverlas 1 a 1 */
+
+.off-canvas-burger::before {
+  transform: rotate(0deg) translate(0, -0.9rem);
+  /* background-color: blue; */
+}
+.off-canvas-burger::after {
+  transform: rotate(0deg) translate(0, 0.3rem);
+  /* background-color: green; */
+}
+/* Aqui le decimos que cuando el btn tenga la pseudoclase checked, al hermano(+) inmediatamente abajo el selector de hermanos adyacentes(+) */
+.off-canvas-btn:checked + .off-canvas-burger {
+  background-color: transparent;
+}
+.off-canvas-btn:checked + .off-canvas-burger {
+  background-color: transparent;
+}
+.off-canvas-btn:checked + .off-canvas-burger::before {
+  /* Con animate  por default cuando giravamos un elmento este giraba desde su centro, sin embargo lo que queremos es que gire desde su esquina superior izquierda,àra ello le daremos al elemento padre joff-canvas-burger le damos un transform-origin:top-left por lo tanto giraran desde su esquina mas superior izquierda de cada uno*/
+  /* transform-origin: top left; */
+  transform: rotate(45deg) translate(0, 0);
+}
+.off-canvas-btn:checked + .off-canvas-burger::after {
+  /* Con animate  por default cuando giravamos un elmento este giraba desde su centro, sin embargo lo que queremos es que gire desde su esquina superior izquierda,àra ello le daremos al elemento padre joff-canvas-burger le damos un transform-origin:top-left por lo tanto giraran desde su esquina mas superior izquierda de cada uno*/
+  transform: rotate(-45deg) translate(0.4rem, -0.5rem);
+}
+
+.off-canvas-menu {
+  /* Ya sabes que cuando tu le das posicionamiento fixed van a perder sus propiedades de alto y ancho y suposicionamiento */
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Si existe la propiedad bottom esta la va a ignorar porque existe un top antes al igual que right, pero si a las 4 propiedades les das el valor 0 extiras el contenedor */
+  bottom: 0;
+  right: 0;
+  z-index: 997;
+  /* Le damos un display flex y como solo tiene un contenedor hijo que es esa div. */
+
+  display: flex;
+  /* Con justify content-center centro con en el eje principal dictada creo por el flex */
+  justify-content: center;
+  /* Con el alight-items centro en el eje transversal */
+  align-items: center;
+  background-color: #0008;
+  transition: transform 500ms ease-in-out;
+  transform: translate(-100%, -100%);
+}
+/* Vamos a tener que ahcer algo parecido como para las animaciones del menu de pestañas con sus input cheked ocultos,pero con la hamburguesa*/
+
+.off-canvas-btn:checked ~ .off-canvas-menu {
+  transform: translate(0, 0);
+}
+.off-canvas-menu-container {
+  width: 100%;
+  height: 100vh;
+
+  /* Voy a apliccar flexbox para alinear estos enlaces que son hijos de la div con esta clase, pero aqui si me interesa la direccion porque esta div es la que tiene los enlaces  */
+  display: flex;
+  /* Entonces le voy a a aplicar un flex-direction:column recuerden que el valor por defecto es row(fila)en horizontal, y column te lo pone uno debajo del otro */
+  flex-direction: column;
+  /* Al ser o¡column el eje que mueve el justify content cambia del eje x al centrar al eje y al centrar. */
+  justify-content: center;
+  /* Con el text-align tambien se cambia el eje y cuando es flex ditrection:row al eje x */
+  /* text-align: center; */
+}
+
+.off-canvas-link {
+  padding: 2rem;
+  border-bottom: thin solid #d00;
+  /* Recordar que aunque estos hijos no son elementos de bloque, al darle a si contenedor display flex convierte a estos en elementos de bloque y cogen todo el ancho disponible */
+  font-size: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 300ms ease;
+}
+.off-canvas-link:first-child {
+  border-top: thin solid #d00;
+}
+.off-canvas-link:hover {
+  background-color: #d005;
+}
+
+/* Voy a aplicar estilos para la ventana modal, y voy a usar la misma técnica anterior */
+.modal {
+  /* Ya sabes que cuando tu le das posicionamiento fixed van a perder sus propiedades de alto y ancho y suposicionamiento */
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Si existe la propiedad bottom esta la va a ignorar porque existe un top antes al igual que right, pero si a las 4 propiedades les das el valor 0 extiras el contenedor */
+  bottom: 0;
+  right: 0;
+  z-index: 997;
+  /* Le damos un display flex y como solo tiene un contenedor hijo que es esa div. */
+
+  display: flex;
+  /* Con justify content-center centro con en el eje principal dictada creo por el flex */
+  justify-content: center;
+  /* Con el alight-items centro en el eje transversal */
+  align-items: center;
+  background-color: #0008;
+  /* Aqui el truco es usar la opacidad para que siga en ese sitio la ventana modal,pero se sigue teniendo interaccion con los enlaces aunque no se vean,para ello hay que quitarle la propiedad pointer-events:none */
+  pointer-events: none;
+  opacity: 0;
+  /* En transicion recuerda que es la propiedad que que queremos ya sea una aimacion o transforamcion o background-color o lo que sea que cambie de algo a algo!! */
+  transition: opacity 500ms ease-in-out;
+}
+/* Y como voy a abrirlo tanto la vision como la interaccion con esta ?? con el target a traves de cuando tenga su href con gatitio */
+.modal:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-container {
+  position: relative;
+  border: thick double #d00;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 70%;
+  height: 70vh;
+  background: #fff;
+  display: flex;
+  text-align: left;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  /* de 2,5-3rem a los elmentos iteractivos por lo de los moviles etc */
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  /* Como solo tengo 1 caracter que es la X puedo usar line-height que es la altura de parrafo,si yo le doy el tamaño de la caja lo centrara verticalmente en esta */
+
+  line-height: 3rem;
+  /* Para quitarle la linea de abajo que lleva por defecto los enlaces */
+  text-decoration: none;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #d00;
+  transition: background-color 300ms linear, transform 300ms ease-in-out;
+}
+
+.modal-close:hover {
+  background-color: #a00;
+  transform: scale(1.2);
+}
+
+/* para la animacion de la pelicula del intro de star wars vamos a tener solo 2 fotogramas en el @keyframe */
+
+@keyframes introStarWars {
+  /* Van a ser transforamciones en 3D para ello vamos a necesitar perspectiva del tamaño de la pantalla, la perspectiva:
+  1-Se le puede dar al contenedor padre 
+  2-Tenerla definida como primer valor en la propiedad transform del hijo y ya luego declaras las propiedades en 3D; */
+  0% {
+    transform: perspective(100vh) rotateX(15deg) translateY(100%);
+  }
+
+  100% {
+    transform: perspective(100vh) rotateX(25deg) translateY(-200%);
+  }
+}
+
+.star-wars {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  color: #ffb13a;
+  background-image: url(../assets/stars.gif);
+  /* El body siempre tiene un margin de 8 px a los 4 lados y queda mal ve a rriba y quitalo para que se vea bien! */
+}
+
+.star-wars-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  /* Justigy content es la forma en que esta escrita etc */
+  text-align: justify;
+  letter-spacing: 0.1rem;
+  /*  la animacion la va a tener el container */
+  animation: introStarWars 20s linear infinite;
+}
+/* Vamos a centrar los encabezados y vamos a  hacer mas grande la letra con selectores de hermanos ,hijos etc */
+
+.star-wars h2,
+h3 {
+  font-size: 5vw;
+  text-align: center;
+}
+.star-wars p {
+  font-size: 3vw;
+  line-height: 4rem;
+}

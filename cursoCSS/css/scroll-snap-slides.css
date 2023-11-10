@@ -1,0 +1,132 @@
+html {
+  box-sizing: content-box;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+/* Necesitamos quitarle el margin del body que tiene de 8px a los 4 lados:lo reseteamos */
+body {
+  margin: 0;
+}
+/* la clase slides es el contenedor de nuestras diapositivas */
+.slides {
+  max-width: 100%;
+  /* Para que este ejercicio funcione debe tener la altura del viewport no la minima sino toda la altura,este efecto funciona tanto en vertical como en horizontal,posteriormente lo haremos horizontal(carrusel) ahora toca vertical */
+  height: 100vh;
+  /* Otra caracteristica que itene que tener el contenedor es que el overflow-y: scroll sino no funciona */
+  overflow-y: scroll;
+  /* Para hacer el efecto quequeremo,debemos ponerle dicho efecto al contenedor padre de todas mis diapositivas y padre de las slide y se llama scroll-snap-type */
+  /* El eje x es el inline y lo que vas a controlar es el desplazamiento horizontal,con la y o block seria el vertical y both tanto x como Y,el segundo valor hay varios valores */
+  /* scroll-snap-type: [x|y|inline block|both][mandatory|proximity]; */
+  /* scroll-snap-type: none; */
+  /* Reglas para que funcione height definida,overflow en ese eje en scroll elmentos hijos scroll-snap-align */
+  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
+  scroll-snap-type: both proximity;
+  scroll-snap-type: y mandatory;
+}
+.slide {
+  width: 100%;
+  height: inherit;
+  background-color: #1e2345;
+  /* Para que funcione los elmentos hijos deben tener una porpiedad que se llam ascroll-snap-slign  */
+  scroll-snap-align: none;
+  /* default */
+  scroll-snap-align: end;
+  /* Se alinearian al final */
+  /* scroll-snap-align: start; */
+  /* Se alinearian al principio */
+  /* scroll-snap-align: center; */
+  /* Se alinearian en la mitad */
+}
+.slide:nth-child(even) {
+  background-color: #108eb4;
+}
+.slide-container {
+  /* El width aqui nos dice que espacio queremos que ocupen nuestras diapositivas lo unimos con los margin auto laterales para que tenga algo de sinergia si ponemos 80% y ponemos un texto o foto solo ocupara ese % dejando el background-color del nivel superior */
+  width: 100%;
+  width: 80%;
+  height: inherit;
+  margin: 0 auto;
+  display: flex;
+  /* Lo volvemos flexbox pero la direccion de la flecha sea en columna,esto significa que el elemento hijos se van a alinear en columna,ya que de serie lo tiene en fila,se lo cambiamos a columna */
+  flex-direction: column;
+  /* Como logramos ese centrado en el contenido, usando jutify-content:center que alinean el eje principal de flexvox  */
+  justify-content: center;
+  /* Y align-items que alinean el eje secundario en flexbox ambos con center */
+  align-items: center;
+  /* En este caso lo que me interesria es que el texto sea un poco  mas grande porque ya que son diapositivas usaremo viewportwidth-->vw  */
+  font-size: 3vw;
+  color: #d9e8f0;
+}
+
+/* carousel */
+
+.carousel {
+  /* En este contenedor es donde vamos a hacer el efecto de scroll-snap-type,para  ello recordar que necesitamos 3reglas: 
+  1-Una altura definida
+  2-una propiedad overflow x/y: scroll
+  3- y la propiedad scroll snap type */
+  border: thick solid #9e38f0;
+  /* Le aplicamos un dsiplay flex para centrar,cuando nosotros aplicamos flexbox al o a los elmentos hijos de este van a tomar por default las medidas del padre y se adapatarian a este */
+  display: flex;
+  width: 50%;
+  height: 50vh;
+  /* En overflo-x hideen significa que todo el contenido que desborde tu contenedor se va a ocultar,luego a todas las diapositivas que pasan por el carousel le vamos a dar las medidas de este y nada mas que pasa 1 la anterior no se ve */
+  overflow-x: hidden;
+}
+.carousel-container {
+  /* 100%  de su contenedor */
+  /*1- Check ya que nuestro snap-scorll es horizontal */
+  width: 100%;
+  /* Como voy a hacer que se alineen en vertical ->usando grid,grid genera filas ycolumnas */
+  /* Primeros ponemos display:grid */
+  display: grid;
+  /* Como necesitamos 5 columnas le ponemos repeat 5 columnas  del 100% lo que me generara una fila con 5 columnas */
+  grid-template-columns: repeat(5, 100%);
+  /* 2 chex la propiedad que queremmos usar definida */
+  overflow-x: scroll;
+  overflow-y: hidden;
+  /* En este caso el padre es este,donde usaremos el scroll-snap-type: x mandatory, ya que el anterior padre lo usamos para definir la ventana y cuadrar sus hijos con flexbox */
+  scroll-snap-type: x mandatory;
+  /* En horizontal es posible que proximity te deja entre 2   */
+  scroll-snap-type: x proximity;
+}
+.carousel-slide {
+  /* Utilizamos flexbox para centrarlas y posteriormente hacer el efecto carrousel */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #108eb4;
+  /* Las hijas deben tener el valor de scroll-snap-align */
+  scroll-snap-align: start;
+  scroll-snap-align: center;
+}
+.carousel-slide:nth-child(even) {
+  background-color: #1e2345;
+}
+
+.gradient-text {
+  /* Puedes aplicar los gradientes lineales,conicos y radiales */
+  background-image: linear-gradient(45deg, magenta, yellow);
+  /* Para que el texto al que le apliquemos esta clase tom envede tomar el valor de color, tome  el del fondo linear, hay que aplicar 2 propiedades: */
+  /*1-Background-clip que era el que decia de donde empezaba el fondo desde el padding margin distancias de estos ,tambien habia uno para imagenes  */
+  /* Si detecta a la caja que tu le estas aplicando el fondo lo de background-clip:text ,el fondo se va a adaptar al texto de la caja*/
+  /* Para internet explorer */
+  /* -ms-background-clip: text; */
+  /* firefox */
+  /* -moz-background-clip: text; */
+  -webkit-background-clip: text;
+  /* Tambien hay que aplicar una tercera propiedad: text-fill-color: transparent esto hace que la propiedad color la ignore a ser transparente  */
+  /* -ms-text-fill-color: transparent; */
+  /* -moz-text-fill-color: transparent; */
+  -webkit-text-fill-color: transparent;
+  /* -ms-text-fill-color: transparent; */
+  /* Con esto conseguimos el degradado del texto de una parte a otra ,esta chachi, no abusar ya que si se usa mucho puede relantizar la web */
+}

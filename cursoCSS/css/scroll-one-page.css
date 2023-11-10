@@ -1,0 +1,60 @@
+html {
+  box-sizing: content-box;
+  font-family: sans-serif;
+  font-size: 16px;
+  /* El documento HTML es el que se esta desplazando y por ende nosotros le podemos dar una propiedad al scroll para que sea smooth osea suave */
+  scroll-behavior: smooth;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+/* Los h1, h2 etc tienen margenes por defecto para realizar bien este ejercicio */
+h1,
+h2,
+body {
+  margin: 0;
+}
+img {
+  max-width: 50%;
+  height: auto;
+}
+.header {
+  position: sticky; /* Pegajosa */
+  top: 0;
+  padding: 0.25rem;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+/* Vamos adarle estilos a los enlaces de la cabecera */
+.header a {
+  margin: 0 1rem;
+  color: #00c4d6;
+}
+/* Ahora en el estado hover le modificamos el color*/
+.header a:hover {
+  color: #e94ee4;
+}
+/* Ahora maquetaremos un poco las sectiones que a todas ya les habiamos dado la clase slide */
+.slide {
+  width: 100%;
+  min-height: 100vh;
+  /* Este padding top se lo ponemos a las secciones para que cuando vayamos a los enlaces la cabecera sticky no aplaste el nombre de la seccion y quede un poco feo,Pero hay una opcion mejor el scroll-margin-top aunque tambien hay left,right y supongo que bottom y colocaria el id en top 0 lo colocaria a la distancia que le indiquemos  */
+  /* padding-top: 5rem; */
+  color: #d9e8f0;
+  padding: 2rem;
+  background-color: #1e2345;
+}
+[id] {
+  /* En este caso como estamos hablando de vertical quiza convendria envede usar px ems o rems nos convendria trabajar con ex ya que estos trabajan con la altura de la letra x mayuscula mas alta del avecedario */
+  scroll-margin-top: 7.25ex; /* Recordemos que un ex es la mitad de un rem */
+}
+/* Even es impar? no en realidad no lo es lo que pasa que el header hace que luego el efecto del azul clarito va a parar a los impares aunque pongamos even y a los pares aunque le pongamos odd ,el header ue he definido hace alguna mierda si quito el header funcionaria como de normal importante!! */
+.slide:nth-child(even) {
+  background-color: #108eb4;
+}
